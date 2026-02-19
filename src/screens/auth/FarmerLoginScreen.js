@@ -10,7 +10,7 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 export default function FarmerLoginScreen() {
-    const { login } = useContext(AuthContext);
+    const { loginFarmer } = useContext(AuthContext);
 
     const [step, setStep] = useState("phone"); // phone | otp
     const [phone, setPhone] = useState("");
@@ -45,7 +45,7 @@ export default function FarmerLoginScreen() {
         }
 
         // Success → Login
-        login({ role: "farmer" });
+        loginFarmer();
     };
 
     const resendOTP = () => {

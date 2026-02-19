@@ -18,7 +18,7 @@ export default function FarmerHomeScreen({ navigation }) {
 
             {/* WEATHER CARD */}
             <View style={styles.card}>
-                <Text style={styles.sectionTitle}>Today's Weather</Text>
+                <Text style={styles.sectionTitle}>Today{"'"}s Weather</Text>
 
                 <View style={styles.weatherRow}>
                     <View>
@@ -78,11 +78,11 @@ export default function FarmerHomeScreen({ navigation }) {
                     icon="camera"
                     title="Capture Crop"
                     sub="Upload crop image"
-                    onPress={() => navigation.navigate("Capture")}
+                    onPress={() => navigation.navigate("CaptureIndex")}
                 />
 
                 <ActionCard
-                    icon="bar-chart"
+                    icon="chart-bar"
                     title="Track Status"
                     sub="Check claim progress"
                     onPress={() => navigation.navigate("Status")}
@@ -135,7 +135,7 @@ export default function FarmerHomeScreen({ navigation }) {
 
 function ActionCard({ icon, title, sub, onPress }) {
     return (
-        <TouchableOpacity style={styles.actionCard} onPress={onPress}>
+        <TouchableOpacity style={styles.actionCard} onPress={onPress} activeOpacity={0.82}>
             <View style={styles.iconCircle}>
                 <FontAwesome5 name={icon} size={18} color="#fff" />
             </View>

@@ -1,30 +1,34 @@
-import { Camera } from "expo-camera";
-import { useEffect, useRef, useState } from "react";
+import { CameraView, useCameraPermissions } from "expo-camera";
+import { useRef } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 export default function FarmerCameraScreen() {
-    const [permission, setPermission] = useState(null);
+    const [permission, requestPermission] = useCameraPermissions();
     const cameraRef = useRef(null);
 
-    useEffect(() => {
-        (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync();
-            setPermission(status === "granted");
-        })();
-    }, []);
-
-    if (permission === null) return <Text>Requesting camera...</Text>;
-    if (permission === false) return <Text>No camera permission</Text>;
+    if (!permission) return <View />;
+    if (!permission.granted) {
+        return (
+            <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>No camera permission</Text>
+                <TouchableOpacity onPress={requestPermission}>
+                    <Text style={{ color: "blue", marginTop: 10 }}>Grant Permission</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
 
     const takePhoto = async () => {
-        const photo = await cameraRef.current.takePictureAsync();
-        alert("Photo Captured");
-        console.log(photo.uri);
+        if (cameraRef.current) {
+            const photo = await cameraRef.current.takePictureAsync();
+            alert("Photo Captured");
+            console.log(photo.uri);
+        }
     };
 
     return (
         <View style={{ flex: 1 }}>
-            <Camera ref={cameraRef} style={{ flex: 1 }} />
+            <CameraView ref={cameraRef} style={{ flex: 1 }} facing="back" />
             <TouchableOpacity
                 style={{
                     position: "absolute",

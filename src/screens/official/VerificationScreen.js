@@ -1,4 +1,4 @@
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const defaultTask = {
     farmId: "A123",
@@ -50,7 +50,7 @@ export default function VerificationScreen({ navigation, route }) {
     };
 
     const startVerification = () => {
-        Alert.alert("Verification Started", "Proceeding with the field verification flow.");
+        navigation.navigate("VerificationGPS");
     };
 
     return (

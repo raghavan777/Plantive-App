@@ -1,17 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-    ScrollView,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function OfficialDashboardScreen({ navigation }) {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        // TODO → Replace with API later
         setTasks([
             {
                 id: "1",
@@ -36,35 +29,41 @@ export default function OfficialDashboardScreen({ navigation }) {
 
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-            {/* HEADER */}
             <Text style={styles.header}>Officer Dashboard</Text>
 
-            {/* STATS CARDS */}
             <View style={styles.statsRow}>
-                <View style={styles.statCard}>
+                <TouchableOpacity
+                    style={styles.statCard}
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate("Assignments")}
+                >
                     <Text style={styles.statNumber}>12</Text>
                     <Text style={styles.statText}>Assigned Farms</Text>
-                </View>
+                </TouchableOpacity>
 
-                <View style={[styles.statCard, styles.urgentCard]}>
+                <TouchableOpacity
+                    style={[styles.statCard, styles.urgentCard]}
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate("Assignments")}
+                >
                     <Text style={[styles.statNumber, { color: "#d32f2f" }]}>5</Text>
                     <Text style={styles.statText}>Pending Verifications</Text>
-                </View>
+                </TouchableOpacity>
 
-                <View style={styles.statCard}>
+                <TouchableOpacity
+                    style={styles.statCard}
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate("Reports")}
+                >
                     <Text style={styles.statNumber}>47</Text>
                     <Text style={styles.statText}>Completed Reports</Text>
-                </View>
+                </TouchableOpacity>
             </View>
 
-            {/* QUICK ACTIONS */}
             <Text style={styles.sectionTitle}>Quick Actions</Text>
 
             <View style={styles.grid}>
-                <TouchableOpacity
-                    style={styles.card}
-                    onPress={() => navigation.navigate("Verify")}
-                >
+                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("Verify")}>
                     <Text style={styles.cardIcon}>📍</Text>
                     <Text style={styles.cardTitle}>Start Visit</Text>
                     <Text style={styles.cardDesc}>Begin farm verification</Text>
@@ -76,20 +75,22 @@ export default function OfficialDashboardScreen({ navigation }) {
                     <Text style={styles.cardDesc}>Upload offline reports</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card}>
+                <TouchableOpacity
+                    style={styles.card}
+                    onPress={() => navigation.navigate("Assignments")}
+                >
                     <Text style={styles.cardIcon}>📋</Text>
                     <Text style={styles.cardTitle}>Assignments</Text>
                     <Text style={styles.cardDesc}>View assigned farms</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.card}>
+                <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("Reports")}>
                     <Text style={styles.cardIcon}>📊</Text>
                     <Text style={styles.cardTitle}>Reports</Text>
                     <Text style={styles.cardDesc}>View past visits</Text>
                 </TouchableOpacity>
             </View>
 
-            {/* TODAY TASKS */}
             <Text style={styles.sectionTitle}>Today{"'"}s Tasks</Text>
 
             {tasks.map((task) => (
@@ -109,8 +110,8 @@ export default function OfficialDashboardScreen({ navigation }) {
                             task.status === "Urgent"
                                 ? styles.urgent
                                 : task.status === "Done"
-                                    ? styles.done
-                                    : styles.pending,
+                                  ? styles.done
+                                  : styles.pending,
                         ]}
                     >
                         {task.status}
@@ -118,7 +119,6 @@ export default function OfficialDashboardScreen({ navigation }) {
                 </TouchableOpacity>
             ))}
 
-            {/* NOTIFICATIONS */}
             <Text style={styles.sectionTitle}>Notifications</Text>
 
             <View style={styles.notification}>
@@ -147,20 +147,17 @@ const styles = StyleSheet.create({
         backgroundColor: "#f5f7f5",
         padding: 16,
     },
-
     header: {
         fontSize: 22,
         fontWeight: "bold",
         color: "#1b5e20",
         marginBottom: 15,
     },
-
     statsRow: {
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 20,
     },
-
     statCard: {
         backgroundColor: "#fff",
         padding: 15,
@@ -169,37 +166,31 @@ const styles = StyleSheet.create({
         alignItems: "center",
         elevation: 3,
     },
-
     urgentCard: {
         borderWidth: 1,
         borderColor: "#d32f2f",
     },
-
     statNumber: {
         fontSize: 20,
         fontWeight: "bold",
         color: "#2e7d32",
     },
-
     statText: {
         fontSize: 12,
         textAlign: "center",
         marginTop: 4,
     },
-
     sectionTitle: {
         fontSize: 18,
         fontWeight: "bold",
         marginVertical: 10,
         color: "#1b5e20",
     },
-
     grid: {
         flexDirection: "row",
         flexWrap: "wrap",
         justifyContent: "space-between",
     },
-
     card: {
         backgroundColor: "#fff",
         width: "48%",
@@ -209,23 +200,19 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         elevation: 2,
     },
-
     cardIcon: {
         fontSize: 28,
         marginBottom: 6,
     },
-
     cardTitle: {
         fontWeight: "bold",
         color: "#2e7d32",
     },
-
     cardDesc: {
         fontSize: 12,
         color: "#666",
         textAlign: "center",
     },
-
     taskCard: {
         backgroundColor: "#fff",
         padding: 15,
@@ -236,16 +223,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
         elevation: 2,
     },
-
     taskTitle: {
         fontWeight: "bold",
     },
-
     taskSub: {
         fontSize: 12,
         color: "#666",
     },
-
     status: {
         paddingHorizontal: 10,
         paddingVertical: 4,
@@ -253,22 +237,18 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: "bold",
     },
-
     pending: {
         backgroundColor: "#fff3cd",
         color: "#856404",
     },
-
     urgent: {
         backgroundColor: "#ffebee",
         color: "#c62828",
     },
-
     done: {
         backgroundColor: "#e8f5e9",
         color: "#2e7d32",
     },
-
     notification: {
         backgroundColor: "#fff",
         padding: 14,
@@ -276,7 +256,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         elevation: 1,
     },
-
     notificationTitle: {
         fontWeight: "bold",
         marginBottom: 2,
