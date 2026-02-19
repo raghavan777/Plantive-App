@@ -36,6 +36,7 @@ export default function FarmerTabNavigator() {
                 tabBarIcon: ({ color, size }) => {
                     let iconName = "home";
                     if (route.name === "Home") iconName = "home";
+                    else if (route.name === "Capture") iconName = "camera";
                     else if (route.name === "Status") iconName = "bar-chart";
                     else if (route.name === "History") iconName = "clipboard";
                     else if (route.name === "Profile") iconName = "person";
@@ -50,6 +51,11 @@ export default function FarmerTabNavigator() {
                 name="Home"
                 component={FarmerHomeScreen}
                 options={{ title: "Home" }}
+            />
+            <Tab.Screen
+                name="Capture"
+                component={FarmerCameraScreen}
+                options={{ title: "Capture" }}
             />
             <Tab.Screen
                 name="Status"
